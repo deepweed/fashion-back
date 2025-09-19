@@ -1,0 +1,133 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Brands {
+  BALLU
+  ISHIMATSU
+  MITSUBISHI_ELECTRIC
+  HISENSE
+  SHUFT
+  BIRYUSA
+  TCL
+  DAHACI
+  BELLUNA
+}
+
+enum Stock {
+  IN_STOCK
+  PRE_ORDER
+  OUT_OF_STOCK
+}
+
+enum Type {
+  AIR_CONDITIONER
+  FRIDGE_EQUIPMENT
+  CONSUMABLES
+}
+
+enum TypeOf {
+  WALL_MOUNTED_AIR // Настенные кондиционеры
+  CASSETE_CONDITIONER // Кассетные кондиционеры
+  DUCTED_CONDITIONER // Канальные кондиционеры
+  WALL_CEILING_CONDITIONER // Настенно потолочные
+}
+
+model Product {
+  id Int @id @default(autoincrement())
+
+  title       String   @db.VarChar(255)
+  description String   @db.Text
+  brand       Brands
+  serie       String   @db.VarChar(45)
+  images      String[]
+  price       Float
+  stock       Stock
+
+  type   Type
+  typeOf TypeOf?
+
+  href String @db.VarChar(155)
+
+  groupId String @map("group_id") @db.VarChar(100)
+
+  airConditionerStat AirConditionerStat?
+  refrigeratorStat   RefrigeratorStat?
+
+  @@map("product")
+}
+
+model AirConditionerStat {
+  id        Int     @id @default(autoincrement())
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productId Int     @unique @map("product_id")
+
+  // Основные характеристики
+  coolingCapacity  Float?  @map("cooling_capacity") // Холодопроизводительность (кВт) 
+  heatingCapacity  Float?  @map("heating_capacity") // Теплопроизводительность (кВт), если есть
+  areaCoverage     Int?    @map("area_coverage") // Рекомендуемая площадь (м²)
+  energyEfficiency String? @map("energy_efficiency") // Класс энергопотребления (например: A++, A+)
+
+  // Второго уровня
+  noiseLevelIndoor  Int?    @map("noise_level_indoor") // Уровень шума внутреннего блока (дБ)
+  noiseLevelOutdoor Int?    @map("noise_level_outdoor") // Уровень шума внешнего блока (дБ)
+  powerConsumption  Float?  @map("power_consumption") // Потребляемая мощность (кВт)
+  refrigerantType   String? @map("refrigerant_type") // Тип хладагента (R32, R410A и т. п.)
+  dimensionsIndoor  String? @map("dimensions_indoor") // Размеры внутреннего блока (Ш×В×Г)
+  dimensionsOutdoor String? @map("dimensions_outdoor") // Размеры внешнего блока
+  weightIndoor      Float?  @map("weight_indoor") // Вес внутреннего блока (кг)
+  weightOutdoor     Float?  @map("weight_outdoor") // Вес внешнего блока (кг)
+
+  // Особенности
+  inverter Boolean // Есть ли инвертор
+  wifi     Boolean // Управление по Wi-Fi
+
+  @@map("air_conditioner_stat")
+}
+
+model RefrigeratorStat {
+  id        Int     @id @default(autoincrement())
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productId Int     @unique @map("product_id")
+
+  // Основные характеристики
+  tempRange        String? @map("temp_range") // Диапазон температур (например: "-25...+22 °C")
+  coolingCapacity  Float?  @map("cooling_capacity") // Холодопроизводительность при -20°C (Вт)
+  refrigerantType  String? @map("refrigerant_type") // Тип хладагента (R507 и т. п.)
+  refrigerantMass  Float?  @map("refrigerant_mass") // Кол-во хладагента (кг)
+  installationType String? @map("installation_type") // Тип установки (настенный и т. п.)
+  powerMax         Float?  @map("power_max") // Макс. энергопотребление (кВт)
+  compressorType   String? @map("compressor_type") // Тип компрессора (On/Off, инвертор)
+  voltage          Int? // Напряжение (В)
+  chamberVolumeM10 Int?    @map("chamber_volume_m10") // Объем камеры при -10°C (м³)
+  chamberVolumeM20 Int?    @map("chamber_volume_m20") // Объем камеры при -20°C (м³)
+  defrostType      String? @map("defrost_type") // Тип оттайки (ТЭН)
+  warranty         String? // Гарантия (например: "2 года")
+
+  // Внешний блок
+  dimensionsOutdoor String? @map("dimensions_outdoor") // Размеры (ВхШхГ), см
+  weightOutdoor     Float?  @map("weight_outdoor") // Вес (кг)
+  heightOutdoor     Float?  @map("height_outdoor") // Высота, см
+  widthOutdoor      Float?  @map("width_outdoor") // Ширина, см
+  depthOutdoor      Float?  @map("depth_outdoor") // Глубина, см
+
+  // Внутренний блок
+  dimensionsIndoor String? @map("dimensions_indoor") // Размеры (ВхШхГ), см
+  weightIndoor     Float?  @map("weight_indoor") // Вес (кг)
+  heightIndoor     Float?  @map("height_indoor") // Высота, см
+  widthIndoor      Float?  @map("width_indoor") // Ширина, см
+  depthIndoor      Float?  @map("depth_indoor") // Глубина, см
+
+  @@map("refrigerator_stat")
+}

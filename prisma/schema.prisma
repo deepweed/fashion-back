@@ -102,7 +102,7 @@ model RefrigeratorStat {
   productId Int     @unique @map("product_id")
 
   // Основные характеристики
-  tempRange        String? @map("temp_range") // Диапазон температур (например: "-25...+22 °C")
+  tempRange        Int?    @map("temp_range") // Диапазон температур (например: "-25...+22 °C")
   coolingCapacity  Float?  @map("cooling_capacity") // Холодопроизводительность при -20°C (Вт)
   refrigerantType  String? @map("refrigerant_type") // Тип хладагента (R507 и т. п.)
   refrigerantMass  Float?  @map("refrigerant_mass") // Кол-во хладагента (кг)
@@ -113,7 +113,6 @@ model RefrigeratorStat {
   chamberVolumeM10 Int?    @map("chamber_volume_m10") // Объем камеры при -10°C (м³)
   chamberVolumeM20 Int?    @map("chamber_volume_m20") // Объем камеры при -20°C (м³)
   defrostType      String? @map("defrost_type") // Тип оттайки (ТЭН)
-  warranty         String? // Гарантия (например: "2 года")
 
   // Внешний блок
   dimensionsOutdoor String? @map("dimensions_outdoor") // Размеры (ВхШхГ), см

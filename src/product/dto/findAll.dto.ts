@@ -95,4 +95,22 @@ export class FindAllProductDto extends PaginationDto {
   @IsOptional()
   @IsString()
   dimensionsIndoor?: string;
+
+  /* Belluna DTO, TODO: вынести в другое место */
+
+  @IsOptional()
+  @IsString()
+  minTempRange?: string;
+
+  @IsOptional()
+  @IsString()
+  maxTempRange?: string;
+
+  @IsOptional()
+  @IsString()
+  refrigerant?: string;
+
+  @IsOptional()
+  @IsString()
+  compressorType?: string;
 }

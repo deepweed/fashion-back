@@ -17,8 +17,8 @@ export class FindAllProductDto extends PaginationDto {
   search?: string; // Поиск по title, brand and serie
 
   @IsOptional()
-  @IsEnum(Brands)
-  brand?: string;
+  @IsString()
+  brands?: string;
 
   @IsOptional()
   @IsString()
@@ -33,11 +33,11 @@ export class FindAllProductDto extends PaginationDto {
   maxPrice?: string;
 
   @IsOptional()
-  @IsEnum(Stock)
+  @IsString()
   stock?: string;
 
   @IsOptional()
-  @IsEnum(TypeOf)
+  @IsString()
   typeOf?: string;
 
   @IsOptional()

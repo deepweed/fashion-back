@@ -47,16 +47,17 @@ enum TypeOf {
 model Product {
   id Int @id @default(autoincrement())
 
-  title       String   @db.VarChar(255)
-  description String   @db.Text
+  title       String      @db.VarChar(255)
+  description String      @db.Text
   brand       Brands
-  serie       String   @db.VarChar(45)
+  serie       String      @db.VarChar(45)
   images      String[]
   price       Float
   stock       Stock
+  documents   Documents[]
 
   type   Type
-  typeOf TypeOf?
+  typeOf TypeOf? @map("type_of")
 
   href String @db.VarChar(155)
 
@@ -64,6 +65,8 @@ model Product {
 
   airConditionerStat AirConditionerStat?
   refrigeratorStat   RefrigeratorStat?
+
+  discount Discount?
 
   @@map("product")
 }
@@ -117,16 +120,28 @@ model RefrigeratorStat {
   // Внешний блок
   dimensionsOutdoor String? @map("dimensions_outdoor") // Размеры (ВхШхГ), см
   weightOutdoor     Float?  @map("weight_outdoor") // Вес (кг)
-  heightOutdoor     Float?  @map("height_outdoor") // Высота, см
-  widthOutdoor      Float?  @map("width_outdoor") // Ширина, см
-  depthOutdoor      Float?  @map("depth_outdoor") // Глубина, см
 
   // Внутренний блок
   dimensionsIndoor String? @map("dimensions_indoor") // Размеры (ВхШхГ), см
   weightIndoor     Float?  @map("weight_indoor") // Вес (кг)
-  heightIndoor     Float?  @map("height_indoor") // Высота, см
-  widthIndoor      Float?  @map("width_indoor") // Ширина, см
-  depthIndoor      Float?  @map("depth_indoor") // Глубина, см
 
   @@map("refrigerator_stat")
+}
+
+model Discount {
+  id        Int     @id @default(autoincrement())
+  percent   Int
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productId Int     @unique @map("product_id")
+
+  createdAt DateTime @default(now()) @map("created_at")
+}
+
+model Documents {
+  id    Int    @id @default(autoincrement())
+  url   String
+  title String
+
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productId Int     @map("product_id")
 }

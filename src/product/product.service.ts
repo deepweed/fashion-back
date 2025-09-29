@@ -9,7 +9,7 @@ import {
   getSortOption,
   getStockOption,
 } from "./filters/commonFilters";
-import { Brands, Prisma, TypeOf } from "@prisma/client";
+import { Prisma } from "@prisma/client";
 import { convertToNumber } from "utils/convertToNumber";
 import {
   getAreaCoverageOption,
@@ -39,8 +39,10 @@ export class ProductService {
       where: filters,
       include: {
         airConditionerStat: true,
+        discount: true,
+        documents: true,
       },
-      orderBy: getSortOption(dto.sort ?? EProductPriceSort.LOW_PRICE),
+      orderBy: dto.sort ? getSortOption(dto.sort) : undefined,
       skip,
       take: perPage,
     });
@@ -70,7 +72,7 @@ export class ProductService {
 
     if (dto.stock) filters.push(getStockOption(dto.stock));
 
-    if (dto.brand) filters.push(getBrandOption(dto.brand));
+    if (dto.brands) filters.push(getBrandOption(dto.brands));
 
     if (dto.typeOf) filters.push(getTypeOfOption(dto.typeOf));
 

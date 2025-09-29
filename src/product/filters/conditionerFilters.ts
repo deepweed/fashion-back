@@ -1,17 +1,12 @@
 import { Brands, Prisma, TypeOf } from "@prisma/client";
 
-export function getBrandOption(brand: string): Prisma.ProductWhereInput {
-  const brandArray = brand.split("|") as Brands[];
+export function getBrandOption(brands: string): Prisma.ProductWhereInput {
+  const brandArray = brands.split("|") as Brands[];
 
   return {
-    AND: [
-      {
-        brand: { in: brandArray },
-      },
-      {
-        brand: { not: Brands.BELLUNA },
-      },
-    ],
+    brand: {
+      in: brandArray,
+    },
   };
 }
 

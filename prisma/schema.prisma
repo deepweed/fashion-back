@@ -59,7 +59,7 @@ model Product {
   type   Type
   typeOf TypeOf? @map("type_of")
 
-  href String @db.VarChar(155)
+  href String @unique @db.VarChar(155)
 
   groupId String @map("group_id") @db.VarChar(100)
 

@@ -38,7 +38,6 @@ export class ProductService {
     const products = await this.prisma.product.findMany({
       where: filters,
       include: {
-        airConditionerStat: true,
         discount: true,
         documents: true,
       },

@@ -12,7 +12,7 @@ export const PRODUCTS: Prisma.ProductCreateInput[] = [
     stock: Stock.IN_STOCK,
     type: Type.AIR_CONDITIONER,
     typeOf: TypeOf.WALL_MOUNTED_AIR,
-    href: "/products/ballu-x1200",
+    href: "ballu-x1200",
     groupId: "BALLU-PLUS-1200",
     // airConditionerStat: {
     //   create: {
@@ -43,7 +43,7 @@ export const PRODUCTS: Prisma.ProductCreateInput[] = [
     stock: Stock.PRE_ORDER,
     type: Type.AIR_CONDITIONER,
     typeOf: TypeOf.CASSETE_CONDITIONER,
-    href: "/products/mitsu-mxz-kj50va",
+    href: "mitsu-mxz-kj50va",
     groupId: "MITSUBISHI-PRO-KJ50",
     // airConditionerStat: {
     //   create: {
@@ -74,7 +74,7 @@ export const PRODUCTS: Prisma.ProductCreateInput[] = [
     stock: Stock.IN_STOCK,
     type: Type.AIR_CONDITIONER,
     typeOf: TypeOf.DUCTED_CONDITIONER,
-    href: "/products/hisense-aud36hx4",
+    href: "hisense-aud36hx4",
     groupId: "HISENSE-PREM-36",
     // airConditionerStat: {
     //   create: {
@@ -105,7 +105,7 @@ export const PRODUCTS: Prisma.ProductCreateInput[] = [
     stock: Stock.IN_STOCK,
     type: Type.AIR_CONDITIONER,
     typeOf: TypeOf.WALL_CEILING_CONDITIONER,
-    href: "/products/shuft-scd180",
+    href: "shuft-scd180",
     groupId: "SHUFT-ECO-180",
     // airConditionerStat: {
     //   create: {
@@ -136,7 +136,7 @@ export const PRODUCTS: Prisma.ProductCreateInput[] = [
     stock: Stock.IN_STOCK,
     type: Type.AIR_CONDITIONER,
     typeOf: TypeOf.WALL_CEILING_CONDITIONER,
-    href: "/products/shuft-scd2000",
+    href: "shuft-scd2000",
     groupId: "SHUFT-ECO-180",
     // airConditionerStat: {
     //   create: {
@@ -167,7 +167,7 @@ export const PRODUCTS: Prisma.ProductCreateInput[] = [
     stock: Stock.OUT_OF_STOCK,
     type: Type.AIR_CONDITIONER,
     typeOf: TypeOf.WALL_MOUNTED_AIR,
-    href: "/products/tcl-elite-t09h",
+    href: "tcl-elite-t09h",
     groupId: "TCL-ELITE-09",
     // airConditionerStat: {
     //   create: {
@@ -198,7 +198,7 @@ export const PRODUCTS: Prisma.ProductCreateInput[] = [
     stock: Stock.PRE_ORDER,
     type: Type.AIR_CONDITIONER,
     typeOf: TypeOf.WALL_MOUNTED_AIR,
-    href: "/products/ishimatsu-icv24hrn",
+    href: "ishimatsu-icv24hrn",
     groupId: "ISHIMATSU-COMFORT-24",
     // airConditionerStat: {
     //   create: {
@@ -224,12 +224,12 @@ export const PRODUCTS: Prisma.ProductCreateInput[] = [
     description: "Эффективное охлаждение для кафе и ресторанов.",
     brand: Brands.BIRYUSA,
     serie: "Standard",
-    images: ["/uploads/biryusa1.png"],
+    images: ["biryusa1.png"],
     price: 88500,
     stock: Stock.IN_STOCK,
     type: Type.AIR_CONDITIONER,
     typeOf: TypeOf.CASSETE_CONDITIONER,
-    href: "/products/biryusa-brc60k",
+    href: "biryusa-brc60k",
     groupId: "BIRYUSA-STAND-60",
     // airConditionerStat: {
     //   create: {
@@ -255,12 +255,12 @@ export const PRODUCTS: Prisma.ProductCreateInput[] = [
     description: "Высокая производительность для больших залов.",
     brand: Brands.DAHACI,
     serie: "Ultra",
-    images: ["/uploads/dahaci1.png"],
+    images: ["dahaci1.png"],
     price: 158000,
     stock: Stock.PRE_ORDER,
     type: Type.AIR_CONDITIONER,
     typeOf: TypeOf.DUCTED_CONDITIONER,
-    href: "/products/dahaci-dhc90",
+    href: "dahaci-dhc90",
     groupId: "DAHACI-ULTRA-90",
     // airConditionerStat: {
     //   create: {
@@ -289,28 +289,10 @@ export const PRODUCTS: Prisma.ProductCreateInput[] = [
     images: ["/uploads/belluna1.png"],
     price: 102000,
     stock: Stock.IN_STOCK,
-    type: Type.AIR_CONDITIONER,
+    type: Type.FRIDGE_EQUIPMENT,
     typeOf: TypeOf.WALL_CEILING_CONDITIONER,
-    href: "/products/belluna-bl50w",
+    href: "belluna-bl50w",
     groupId: "BELLUNA-SMART-50",
-    // airConditionerStat: {
-    //   create: {
-    //     coolingCapacity: 5.2,
-    //     heatingCapacity: 5.5,
-    //     areaCoverage: 50,
-    //     energyEfficiency: "A+",
-    //     noiseLevelIndoor: 27,
-    //     noiseLevelOutdoor: 53,
-    //     powerConsumption: 1.9,
-    //     refrigerantType: "R410A",
-    //     dimensionsIndoor: "960×240×680",
-    //     dimensionsOutdoor: "870×860×360",
-    //     weightIndoor: 28,
-    //     weightOutdoor: 58,
-    //     inverter: true,
-    //     wifi: true,
-    //   },
-    // },
   },
 
   // Оказывается createMany не поддерживает вложенные модели, пришлось их закоментить

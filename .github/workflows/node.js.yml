@@ -26,8 +26,25 @@ jobs:
         with:
           bun-version: 1.1.38
 
+      - name: Create .env file
+        run: |
+          cat <<EOF > .env
+          FRONTEND_URL=${{ secrets.FRONTEND_URL }}
+          ADMIN_URL=${{ secrets.ADMIN_URL }}
+          TELEGRAM_BOT_TOKEN=${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID=${{ secrets.TELEGRAM_CHAT_ID }}
+          TELEGRAM_THREAD_CALL_ID=${{ secrets.TELEGRAM_THREAD_CALL_ID }}
+          TELEGRAM_THREAD_ORDER_ID=${{ secrets.TELEGRAM_THREAD_ORDER_ID }}
+          EOF
+
       - name: Install dependencies
         run: bun install --frozen-lockfile
+
+      - name: Generate Prisma Client
+        run: bunx prisma generate
+
+      - name: Run Prisma migrations
+        run: bunx prisma migrate deploy
 
       - name: Build Nest.js
         run: bun run build

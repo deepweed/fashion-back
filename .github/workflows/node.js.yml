@@ -29,6 +29,7 @@ jobs:
       - name: Create .env file
         run: |
           cat <<EOF > .env
+          DATABASE_URL=${{ secrets.DATABASE_URL }}
           FRONTEND_URL=${{ secrets.FRONTEND_URL }}
           ADMIN_URL=${{ secrets.ADMIN_URL }}
           TELEGRAM_BOT_TOKEN=${{ secrets.TELEGRAM_BOT_TOKEN }}

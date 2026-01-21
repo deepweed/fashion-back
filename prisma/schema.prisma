@@ -23,6 +23,9 @@ enum Brands {
   TCL
   DAHACI
   BELLUNA
+  LORIOT
+  LANKORA
+  VITELLI
 }
 
 enum Stock {
@@ -105,7 +108,7 @@ model RefrigeratorStat {
   productId Int     @unique @map("product_id")
 
   // Основные характеристики
-  tempRange        Int?    @map("temp_range") // Диапазон температур (например: "-25...+22 °C")
+  tempRange        String? @map("temp_range") // Диапазон температур (например: "-25...+22 °C")
   coolingCapacity  Float?  @map("cooling_capacity") // Холодопроизводительность при -20°C (Вт)
   refrigerantType  String? @map("refrigerant_type") // Тип хладагента (R507 и т. п.)
   refrigerantMass  Float?  @map("refrigerant_mass") // Кол-во хладагента (кг)

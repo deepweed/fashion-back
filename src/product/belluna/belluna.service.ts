@@ -15,14 +15,13 @@ import {
   getCompressorTypeOption,
   getCoolingCapacityOption,
   getPowerMaxOption,
-  getTempRangeOption,
 } from "../filters/refrigerationFilters";
 
 @Injectable()
 export class BellunaService {
   constructor(
     private prisma: PrismaService,
-    private paginationService: PaginationService
+    private paginationService: PaginationService,
   ) {}
 
   async findBelluna(dto: FindBellunaProductDto = {}) {
@@ -61,8 +60,8 @@ export class BellunaService {
       filters.push(
         getPriceOption(
           convertToNumber(dto.minPrice),
-          convertToNumber(dto.maxPrice)
-        )
+          convertToNumber(dto.maxPrice),
+        ),
       );
 
     if (dto.compressorType)
@@ -72,24 +71,16 @@ export class BellunaService {
       filters.push(
         getPowerMaxOption(
           convertToNumber(dto.minPowerMax),
-          convertToNumber(dto.maxPowerMax)
-        )
-      );
-
-    if (dto.minTemp || dto.maxTemp)
-      filters.push(
-        getTempRangeOption(
-          convertToNumber(dto.minTemp),
-          convertToNumber(dto.maxTemp)
-        )
+          convertToNumber(dto.maxPowerMax),
+        ),
       );
 
     if (dto.minCooling || dto.maxCooling)
       filters.push(
         getCoolingCapacityOption(
           convertToNumber(dto.minCooling),
-          convertToNumber(dto.maxCooling)
-        )
+          convertToNumber(dto.maxCooling),
+        ),
       );
 
     if (dto.stock) filters.push(getStockOption(dto.stock));

@@ -1,7 +1,7 @@
 import { Prisma } from "@prisma/client";
 
 export function getCompressorTypeOption(
-  compressorType?: string
+  compressorType?: string,
 ): Prisma.ProductWhereInput | {} {
   if (!compressorType) {
     return {};
@@ -28,7 +28,7 @@ export function getCompressorTypeOption(
 
 export function getPowerMaxOption(
   minPowerMax?: number,
-  maxPowerMax?: number
+  maxPowerMax?: number,
 ): Prisma.ProductWhereInput {
   let powerMax: Prisma.NestedFloatFilter = {};
 
@@ -47,30 +47,9 @@ export function getPowerMaxOption(
   };
 }
 
-export function getTempRangeOption(
-  minTemp?: number,
-  maxTemp?: number
-): Prisma.ProductWhereInput {
-  let tempRange: Prisma.NestedIntFilter = {};
-
-  if (minTemp !== undefined) {
-    tempRange = { ...tempRange, gte: minTemp };
-  }
-
-  if (maxTemp !== undefined) {
-    tempRange = { ...tempRange, lte: maxTemp };
-  }
-
-  return {
-    refrigeratorStat: {
-      tempRange: Object.keys(tempRange).length ? tempRange : undefined,
-    },
-  };
-}
-
 export function getCoolingCapacityOption(
   minCooling?: number,
-  maxCooling?: number
+  maxCooling?: number,
 ): Prisma.ProductWhereInput {
   let coolingCapacity: Prisma.NestedFloatFilter = {};
 

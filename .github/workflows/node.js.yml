@@ -43,6 +43,10 @@ jobs:
       - name: Generate Prisma Client
         run: bunx prisma generate
 
+      - name: Baseline existing database (one time only)
+        run: bunx prisma migrate resolve --applied "0_init"
+        continue-on-error: true
+
       - name: Run Prisma migrations
         run: bunx prisma migrate deploy
 

@@ -1,0 +1,36 @@
+name: Deploy NestJS (bun)
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  build:
+    runs-on: self-hosted
+
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      PORT: ${{ secrets.PORT }}
+      TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+      TELEGRAM_THREAD_CALL_ID: ${{ secrets.TELEGRAM_THREAD_CALL_ID }}
+      TELEGRAM_THREAD_ORDER_ID: ${{ secrets.TELEGRAM_THREAD_ORDER_ID }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: 1.1.38
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Build Nest.js
+        run: bun run build
+
+      - name: Restart app
+        run: |
+          pm2 describe nest-app || pm2 start "bun run start" --name nest-app
+          pm2 restart nest-app --update-env

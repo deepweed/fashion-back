@@ -85,6 +85,6 @@ export class BellunaService {
 
     if (dto.stock) filters.push(getStockOption(dto.stock));
 
-    return filters.length ? { AND: filters } : {};
+    return filters.length ? { AND: filters } : {}; //here
   }
 }

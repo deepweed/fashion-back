@@ -7,5 +7,6 @@ import { PaginationService } from "src/pagination/pagination.service";
 @Module({
   controllers: [BellunaController],
   providers: [BellunaService, PrismaService, PaginationService],
+  exports: [BellunaService],
 })
 export class BellunaModule {}

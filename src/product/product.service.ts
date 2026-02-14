@@ -172,8 +172,11 @@ export class ProductService {
 
       // Добавляем документы если есть
       if (dto.documents && dto.documents.length > 0) {
+        const cleanDocuments = dto.documents.map(
+          ({ id: _id, productId: _productId, ...doc }) => doc,
+        );
         data.documents = {
-          create: dto.documents,
+          create: cleanDocuments,
         };
       }
 
@@ -381,10 +384,13 @@ export class ProductService {
           where: { productId: id },
         });
 
-        // Создаём новые документы
+        // Создаём новые документы (убираем id и productId)
         if (dto.documents.length > 0) {
+          const cleanDocuments = dto.documents.map(
+            ({ id: _id, productId: _productId, ...doc }) => doc,
+          );
           data.documents = {
-            create: dto.documents,
+            create: cleanDocuments,
           };
         }
       }

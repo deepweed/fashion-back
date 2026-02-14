@@ -139,6 +139,14 @@ class DiscountDto {
 }
 
 class DocumentDto {
+  @IsOptional()
+  @IsInt()
+  id?: number;
+
+  @IsOptional()
+  @IsInt()
+  productId?: number;
+
   @IsString()
   title: string;
 

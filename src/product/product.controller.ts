@@ -32,6 +32,11 @@ export class ProductController {
     return this.productService.create(dto);
   }
 
+  @Get("admin/all") // Новый эндпоинт для админки
+  async findAllForAdmin() {
+    return this.productService.findAllForAdmin();
+  }
+
   @Get(":id")
   async findOne(@Param("id") id: string) {
     return this.productService.findOne(+id);
@@ -45,10 +50,5 @@ export class ProductController {
   @Delete(":id")
   async delete(@Param("id") id: string) {
     return this.productService.delete(+id);
-  }
-
-  @Get("admin/all") // Новый эндпоинт для админки
-  async findAllForAdmin() {
-    return this.productService.findAllForAdmin();
   }
 }

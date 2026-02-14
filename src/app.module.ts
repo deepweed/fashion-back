@@ -3,8 +3,9 @@ import { ServeStaticModule } from "@nestjs/serve-static";
 import { path } from "app-root-path";
 import { ProductModule } from "./product/product.module";
 import { PaginationModule } from "./pagination/pagination.module";
-import { OrderModule } from './telegram/order/order.module';
-import { PhoneModule } from './telegram/phone/phone.module';
+import { OrderModule } from "./telegram/order/order.module";
+import { PhoneModule } from "./telegram/phone/phone.module";
+import { BellunaModule } from "./product/belluna/belluna.module";
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { PhoneModule } from './telegram/phone/phone.module';
     }),
     ProductModule,
     PaginationModule,
+    BellunaModule,
     OrderModule,
     PhoneModule,
   ],

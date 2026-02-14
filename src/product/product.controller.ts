@@ -14,15 +14,25 @@ import { ProductService } from "./product.service";
 import { FindAllProductDto } from "./dto/findAll.dto";
 import { CreateProductDto } from "src/pagination/dto/product-create.dto";
 import { UpdateProductDto } from "src/pagination/dto/update-product.dto";
+import { BellunaService } from "./belluna/belluna.service";
+import { FindBellunaProductDto } from "./dto/findBelluna.dto";
 
 @Controller("products")
 export class ProductController {
-  constructor(private readonly productService: ProductService) {}
+  constructor(
+    private readonly productService: ProductService,
+    private readonly bellunaService: BellunaService,
+  ) {}
 
   @UsePipes(new ValidationPipe())
   @Get()
   async findAll(@Query() query: FindAllProductDto) {
     return this.productService.findAll(query);
+  }
+
+  @Get("belluna")
+  async findBelluna(@Query() query: FindBellunaProductDto) {
+    return this.bellunaService.findBelluna(query);
   }
 
   // ADMINS FUCK IT ALL
@@ -39,6 +49,12 @@ export class ProductController {
 
   @Get(":id")
   async findOne(@Param("id") id: string) {
+    console.log(
+      "🔴 ProductController.findOne вызван! id =",
+      id,
+      "type =",
+      typeof id,
+    );
     return this.productService.findOne(+id);
   }
 

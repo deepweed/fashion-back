@@ -4,12 +4,13 @@ import { ProductController } from "./product.controller";
 import { PrismaService } from "src/prisma.service";
 import { PaginationService } from "src/pagination/pagination.service";
 import { PaginationModule } from "src/pagination/pagination.module";
-import { BellunaModule } from './belluna/belluna.module';
-import { GoodsModule } from './goods/goods.module';
+import { BellunaModule } from "./belluna/belluna.module";
+import { GoodsModule } from "./goods/goods.module";
+import { BellunaController } from "./belluna/belluna.controller";
 
 @Module({
   imports: [PaginationModule, BellunaModule, GoodsModule],
-  controllers: [ProductController],
+  controllers: [ProductController, BellunaController],
   providers: [ProductService, PrismaService, PaginationService],
 })
 export class ProductModule {}

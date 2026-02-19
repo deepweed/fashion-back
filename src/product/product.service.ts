@@ -118,7 +118,7 @@ export class ProductService {
     return filters.length ? { AND: filters } : {};
   }
 
-  // ADMINKA
+  // ADMINKA must be deleted
 
   async create(dto: CreateProductDto) {
     try {

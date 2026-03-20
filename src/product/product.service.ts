@@ -119,7 +119,6 @@ export class ProductService {
   }
 
   // ADMINKA must be deleted
-  //async func
 
   async create(dto: CreateProductDto) {
     try {

@@ -195,7 +195,7 @@ export class ProductService {
       if (error instanceof ConflictException) {
         throw error;
       }
-      throw new Error(`Ошибка создания товара: ${error.message}`);
+      throw new Error(`Ошибка создания товара`);
     }
   }
 
@@ -414,7 +414,7 @@ export class ProductService {
       ) {
         throw error;
       }
-      throw new Error(`Ошибка обновления товара: ${error.message}`);
+      throw new Error(`Ошибка обновления товара`);
     }
   }
 
@@ -432,7 +432,7 @@ export class ProductService {
       if (error instanceof NotFoundException) {
         throw error;
       }
-      throw new Error(`Ошибка удаления товара: ${error.message}`);
+      throw new Error(`Ошибка удаления товара`);
     }
   }
 

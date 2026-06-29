@@ -1,8 +1,10 @@
-import { Module } from '@nestjs/common';
-import { PhoneService } from './phone.service';
-import { PhoneController } from './phone.controller';
+import { Module } from "@nestjs/common";
+import { PhoneService } from "./phone.service";
+import { PhoneController } from "./phone.controller";
+import { EmailModule } from "src/email/email.module";
 
 @Module({
+  imports: [EmailModule],
   controllers: [PhoneController],
   providers: [PhoneService],
 })
